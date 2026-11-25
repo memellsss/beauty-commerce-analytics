@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650" role="img" aria-labelledby="title description" font-family="Segoe UI, Arial, sans-serif">
+<title id="title">Beauty Commerce Analytics</title>
+<desc id="description">Indicadores de e-commerce simulado, ranking de marcas e série de unidades vendidas até dezembro de 2025, com projeção de janeiro a março de 2026.</desc>
+<rect x="0" y="0" width="1200" height="650" fill="#F7F3FA" rx="22"/>
+<rect x="24" y="24" width="1152" height="140" fill="#29203F" rx="18"/>
+<text x="52" y="59" font-size="14" fill="#E1CCFA" font-weight="700" text-anchor="start">PORTFÓLIO DE DADOS     /     E-COMMERCE</text>
+<text x="52" y="108" font-size="42" fill="#FFFFFF" font-weight="700" text-anchor="start">Beauty Commerce Analytics</text>
+<text x="53" y="138" font-size="16" fill="#E1CCFA" font-weight="400" text-anchor="start">Vendas simuladas · jan/2024 a dez/2025</text>
+<rect x="953" y="47" width="194" height="34" fill="#503867" rx="17"/>
+<text x="1050" y="69" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">DADOS SINTÉTICOS</text>
+<rect x="24" y="182" width="276" height="96" fill="#FFFFFF" rx="15"/>
+<text x="42" y="213" font-size="15" fill="#625A72" font-weight="400" text-anchor="start">Receita líquida</text>
+<text x="42" y="251" font-size="27" fill="#252037" font-weight="700" text-anchor="start">R$ 326.870,20</text>
+<rect x="316" y="182" width="276" height="96" fill="#FFFFFF" rx="15"/>
+<text x="334" y="213" font-size="15" fill="#625A72" font-weight="400" text-anchor="start">Pedidos</text>
+<text x="334" y="251" font-size="27" fill="#252037" font-weight="700" text-anchor="start">3.334</text>
+<rect x="608" y="182" width="276" height="96" fill="#FFFFFF" rx="15"/>
+<text x="626" y="213" font-size="15" fill="#625A72" font-weight="400" text-anchor="start">Unidades vendidas</text>
+<text x="626" y="251" font-size="27" fill="#252037" font-weight="700" text-anchor="start">5.440</text>
+<rect x="900" y="182" width="276" height="96" fill="#FFFFFF" rx="15"/>
+<text x="918" y="213" font-size="15" fill="#625A72" font-weight="400" text-anchor="start">Ticket médio</text>
+<text x="918" y="251" font-size="27" fill="#252037" font-weight="700" text-anchor="start">R$ 98,04</text>
+<rect x="24" y="296" width="392" height="287" fill="#FFFFFF" rx="15"/>
+<rect x="434" y="296" width="742" height="287" fill="#FFFFFF" rx="15"/>
+<text x="46" y="334" font-size="20" fill="#252037" font-weight="700" text-anchor="start">Receita por marca</text>
+<text x="46" y="357" font-size="13" fill="#625A72" font-weight="400" text-anchor="start">Ranking das marcas fictícias</text>
+<text x="456" y="334" font-size="20" fill="#252037" font-weight="700" text-anchor="start">Vendas e previsão de demanda</text>
+<text x="456" y="357" font-size="13" fill="#625A72" font-weight="400" text-anchor="start">Unidades por mês · erro no teste: 14,0% (WAPE por categoria)</text>
+<text x="46" y="387" font-size="14" fill="#252037" font-weight="600" text-anchor="start">Estúdio Aurora</text>
+<text x="393" y="387" font-size="13" fill="#625A72" font-weight="400" text-anchor="end">R$ 98.887,40</text>
+<rect x="46" y="395" width="347" height="8" fill="#F1EAF7" rx="4"/>
+<rect x="46" y="395" width="347.0" height="8" fill="#6335A5" rx="4"/>
+<text x="46" y="434" font-size="14" fill="#252037" font-weight="600" text-anchor="start">Verde Âmbar</text>
+<text x="393" y="434" font-size="13" fill="#625A72" font-weight="400" text-anchor="end">R$ 91.205,15</text>
+<rect x="46" y="442" width="347" height="8" fill="#F1EAF7" rx="4"/>
+<rect x="46" y="442" width="320.04" height="8" fill="#6335A5" rx="4"/>
+<text x="46" y="481" font-size="14" fill="#252037" font-weight="600" text-anchor="start">Rosa de Vidro</text>
+<text x="393" y="481" font-size="13" fill="#625A72" font-weight="400" text-anchor="end">R$ 75.963,75</text>
+<rect x="46" y="489" width="347" height="8" fill="#F1EAF7" rx="4"/>
+<rect x="46" y="489" width="266.56" height="8" fill="#6335A5" rx="4"/>
+<text x="46" y="528" font-size="14" fill="#252037" font-weight="600" text-anchor="start">Nuvem Clara</text>
+<text x="393" y="528" font-size="13" fill="#625A72" font-weight="400" text-anchor="end">R$ 60.813,90</text>
+<rect x="46" y="536" width="347" height="8" fill="#F1EAF7" rx="4"/>
+<rect x="46" y="536" width="213.4" height="8" fill="#6335A5" rx="4"/>
+<rect x="1086.12" y="395" width="62.88" height="117" fill="#F8EBF3" rx="0"/>
+<line x1="495" y1="512.0" x2="1149" y2="512.0" stroke="#E6DEED" stroke-width="1"/>
+<text x="486" y="516.0" font-size="11" fill="#625A72" font-weight="400" text-anchor="end">0</text>
+<line x1="495" y1="453.5" x2="1149" y2="453.5" stroke="#E6DEED" stroke-width="1"/>
+<text x="486" y="457.5" font-size="11" fill="#625A72" font-weight="400" text-anchor="end">200</text>
+<line x1="495" y1="395.0" x2="1149" y2="395.0" stroke="#E6DEED" stroke-width="1"/>
+<text x="486" y="399.0" font-size="11" fill="#625A72" font-weight="400" text-anchor="end">400</text>
+<polyline points="495.0,453.5 520.15,461.98 545.31,448.82 570.46,458.47 595.62,445.89 620.77,463.74 645.92,458.18 671.08,460.52 696.23,454.38 721.38,461.98 746.54,422.79 771.69,445.89 796.85,449.11 822.0,451.16 847.15,439.46 872.31,441.51 897.46,426.59 922.62,442.09 947.77,436.83 972.92,450.28 998.08,441.8 1023.23,440.05 1048.38,409.04 1073.54,432.73" fill="none" stroke="#6335A5" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="456" y1="561" x2="478" y2="561" stroke="#6335A5" stroke-width="3"/>
+<text x="486" y="565" font-size="13" fill="#625A72" font-weight="400" text-anchor="start">Vendas reais*</text>
+<polyline points="1073.54,432.73 1098.69,440.05 1123.85,435.37 1149.0,428.35" fill="none" stroke="#A42C64" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="594" y1="561" x2="616" y2="561" stroke="#A42C64" stroke-width="3"/>
+<text x="624" y="565" font-size="13" fill="#625A72" font-weight="400" text-anchor="start">Previsão</text>
+<text x="495.0" y="532" font-size="11" fill="#625A72" font-weight="400" text-anchor="middle">jan/24</text>
+<text x="645.92" y="532" font-size="11" fill="#625A72" font-weight="400" text-anchor="middle">jul/24</text>
+<text x="796.85" y="532" font-size="11" fill="#625A72" font-weight="400" text-anchor="middle">jan/25</text>
+<text x="947.77" y="532" font-size="11" fill="#625A72" font-weight="400" text-anchor="middle">jul/25</text>
+<text x="1098.69" y="532" font-size="11" fill="#625A72" font-weight="400" text-anchor="middle">jan/26</text>
+<text x="26" y="615" font-size="13" fill="#625A72" font-weight="400" text-anchor="start">* Vendas observadas no cenário simulado. Prévia estática gerada pelo pipeline Python.</text>
+</svg>

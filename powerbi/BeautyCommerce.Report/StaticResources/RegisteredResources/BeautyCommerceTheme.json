@@ -1,0 +1,13 @@
+{
+  "name": "Beauty Commerce",
+  "dataColors": [
+    "#6335A5",
+    "#A42C64",
+    "#137F7A",
+    "#DE9D31",
+    "#583E72"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#252037",
+  "tableAccent": "#6335A5"
+}

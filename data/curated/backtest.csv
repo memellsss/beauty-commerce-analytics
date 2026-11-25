@@ -1,0 +1,13 @@
+mes,categoria_id,metodo,unidades_reais,unidades_previstas,erro_absoluto
+2025-10-01,pele,Média dos últimos 3 meses,77,63,14
+2025-11-01,pele,Média dos últimos 3 meses,89,63,26
+2025-12-01,pele,Média dos últimos 3 meses,74,63,11
+2025-10-01,cabelo,Sazonal com ajuste de nível,60,57,3
+2025-11-01,cabelo,Sazonal com ajuste de nível,61,62,1
+2025-12-01,cabelo,Sazonal com ajuste de nível,46,40,6
+2025-10-01,make,Média dos últimos 3 meses,63,56,7
+2025-11-01,make,Média dos últimos 3 meses,68,56,12
+2025-12-01,make,Média dos últimos 3 meses,44,56,12
+2025-10-01,fragrancia,Sazonal com ajuste de nível,46,35,11
+2025-11-01,fragrancia,Sazonal com ajuste de nível,134,148,14
+2025-12-01,fragrancia,Sazonal com ajuste de nível,107,112,5

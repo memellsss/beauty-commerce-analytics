@@ -1,0 +1,535 @@
+{
+  "name": "BeautyCommerce",
+  "compatibilityLevel": 1601,
+  "model": {
+    "culture": "pt-BR",
+    "sourceQueryCulture": "pt-BR",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": false
+    },
+    "annotations": [
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"PastaDados\", \"LerCsv\", \"Calendário\", \"Categorias\", \"Produtos\", \"Vendas\", \"Previsão\", \"Backtest\"]"
+      }
+    ],
+    "expressions": [
+      {
+        "name": "PastaDados",
+        "kind": "m",
+        "lineageTag": "192b7347-dc17-5b17-a144-4e0fc49f023a",
+        "expression": "\"GitHub\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      },
+      {
+        "name": "LerCsv",
+        "kind": "m",
+        "lineageTag": "00c735bd-97fd-5085-b2e6-684ebde8ee7e",
+        "expression": [
+          "(Nome as text) as table =>",
+          "let",
+          "    Conteudo = if PastaDados = \"GitHub\" then",
+          "        Web.Contents(\"https://raw.githubusercontent.com\", [RelativePath = \"memellsss/beauty-commerce-analytics/main/data/curated/\" & Nome])",
+          "        else File.Contents(PastaDados & \"/\" & Nome),",
+          "    Linhas = Csv.Document(Conteudo, [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),",
+          "    Cabecalhos = Table.PromoteHeaders(Linhas, [PromoteAllScalars = true])",
+          "in",
+          "    Cabecalhos"
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Calendário",
+        "isHidden": false,
+        "lineageTag": "3ed6ad10-61f1-5662-b603-d6158743287d",
+        "columns": [
+          {
+            "name": "Data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "lineageTag": "4f69027d-e406-57fc-b351-e0b3e35745ff",
+            "formatString": "dd/MM/yyyy",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Ano/mês",
+            "dataType": "string",
+            "sourceColumn": "ano_mes",
+            "summarizeBy": "none",
+            "lineageTag": "7088558d-ce82-5182-8783-9219d0094982"
+          },
+          {
+            "name": "Ano",
+            "dataType": "int64",
+            "sourceColumn": "ano",
+            "summarizeBy": "none",
+            "lineageTag": "d3710bbb-0fdc-5502-a5ac-ade61d011028"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Calendário",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"calendario.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"data\", type date}, {\"ano_mes\", type text}, {\"ano\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Categorias",
+        "isHidden": false,
+        "lineageTag": "8ed28462-7e24-53bd-9709-e2faf138f86e",
+        "columns": [
+          {
+            "name": "ID da categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria_id",
+            "summarizeBy": "none",
+            "lineageTag": "a4930413-ed36-59b5-b8be-44f46cc7fcb5",
+            "isHidden": true
+          },
+          {
+            "name": "Categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria",
+            "summarizeBy": "none",
+            "lineageTag": "e88e5ebf-6b7a-5880-9760-7aa6522e8722"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Categorias",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"categorias.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"categoria_id\", type text}, {\"categoria\", type text}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Produtos",
+        "isHidden": false,
+        "lineageTag": "d9816767-158d-580c-bad6-91769e4d03a7",
+        "columns": [
+          {
+            "name": "ID do produto",
+            "dataType": "string",
+            "sourceColumn": "produto_id",
+            "summarizeBy": "none",
+            "lineageTag": "5dd10432-66b9-5a25-ae9a-4276adad0ab1",
+            "isHidden": true
+          },
+          {
+            "name": "Produto",
+            "dataType": "string",
+            "sourceColumn": "produto",
+            "summarizeBy": "none",
+            "lineageTag": "0e13e8ac-1987-5010-aba8-36dd01cda8db"
+          },
+          {
+            "name": "Marca",
+            "dataType": "string",
+            "sourceColumn": "marca",
+            "summarizeBy": "none",
+            "lineageTag": "6899ca9b-048c-5569-b31e-b89c682bb438"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Produtos",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"produtos.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"produto_id\", type text}, {\"produto\", type text}, {\"marca\", type text}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Vendas",
+        "isHidden": false,
+        "lineageTag": "7adcf6a1-bcc7-5357-ab7e-98f1a0f8fa36",
+        "columns": [
+          {
+            "name": "ID do pedido",
+            "dataType": "string",
+            "sourceColumn": "pedido_id",
+            "summarizeBy": "none",
+            "lineageTag": "3fb901a6-7498-58e9-b5a2-b0081866c91d",
+            "isHidden": true
+          },
+          {
+            "name": "Item",
+            "dataType": "int64",
+            "sourceColumn": "item",
+            "summarizeBy": "none",
+            "lineageTag": "67eac519-b6ee-50d4-aeb6-faeefdabdc34"
+          },
+          {
+            "name": "Data",
+            "dataType": "dateTime",
+            "sourceColumn": "data",
+            "summarizeBy": "none",
+            "lineageTag": "b00d0b77-2505-5b36-b635-ac9623f2142c",
+            "formatString": "dd/MM/yyyy",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "ID do produto",
+            "dataType": "string",
+            "sourceColumn": "produto_id",
+            "summarizeBy": "none",
+            "lineageTag": "1c221985-872d-56c3-8ca5-4f7302465864",
+            "isHidden": true
+          },
+          {
+            "name": "ID da categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria_id",
+            "summarizeBy": "none",
+            "lineageTag": "eb0fe040-0e85-56ed-88f3-177bafd1339a",
+            "isHidden": true
+          },
+          {
+            "name": "Canal",
+            "dataType": "string",
+            "sourceColumn": "canal",
+            "summarizeBy": "none",
+            "lineageTag": "cf1c85ff-cd7d-5131-9932-f1901a3fbf31"
+          },
+          {
+            "name": "Quantidade",
+            "dataType": "int64",
+            "sourceColumn": "quantidade",
+            "summarizeBy": "none",
+            "lineageTag": "d6fb1308-0e27-5084-a29d-e7d515c1a066"
+          },
+          {
+            "name": "Preço unitário",
+            "dataType": "decimal",
+            "sourceColumn": "preco_unitario",
+            "summarizeBy": "none",
+            "lineageTag": "2234c9ca-d214-54f3-a54d-9226bbe5e854"
+          },
+          {
+            "name": "Desconto (%)",
+            "dataType": "int64",
+            "sourceColumn": "desconto_pct",
+            "summarizeBy": "none",
+            "lineageTag": "90e02d71-08d5-50ef-abd6-e7a6f41f2707"
+          },
+          {
+            "name": "Valor líquido",
+            "dataType": "decimal",
+            "sourceColumn": "receita_liquida",
+            "summarizeBy": "none",
+            "lineageTag": "98af0afb-61da-59c0-8292-0940f39c2e69"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Vendas",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"vendas.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"pedido_id\", type text}, {\"item\", Int64.Type}, {\"data\", type date}, {\"produto_id\", type text}, {\"categoria_id\", type text}, {\"canal\", type text}, {\"quantidade\", Int64.Type}, {\"preco_unitario\", Currency.Type}, {\"desconto_pct\", Int64.Type}, {\"receita_liquida\", Currency.Type}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Receita líquida",
+            "expression": "SUM('Vendas'[Valor líquido])",
+            "description": "Venda de produtos após descontos, sem frete ou impostos.",
+            "lineageTag": "125e6c4c-9981-509f-89e3-9510a54f870e",
+            "formatString": "\"R$ \" #,0.00"
+          },
+          {
+            "name": "Pedidos",
+            "expression": "DISTINCTCOUNT('Vendas'[ID do pedido])",
+            "description": "Pedidos distintos no contexto dos filtros.",
+            "lineageTag": "0010beee-8418-57af-9618-b18b02bec510",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Unidades vendidas",
+            "expression": "SUM('Vendas'[Quantidade])",
+            "description": "Soma da quantidade vendida, não o número de linhas.",
+            "lineageTag": "8bfd3f0b-e703-5ca7-9b97-822c0f13c094",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Ticket médio",
+            "expression": "DIVIDE([Receita líquida], [Pedidos])",
+            "description": "Receita líquida por pedido distinto.",
+            "lineageTag": "c51eb226-e83e-50f1-ad97-4f6d72f9e119",
+            "formatString": "\"R$ \" #,0.00"
+          }
+        ]
+      },
+      {
+        "name": "Previsão",
+        "isHidden": false,
+        "lineageTag": "78fd3edd-d899-5b60-b92b-f089b0c75b3b",
+        "columns": [
+          {
+            "name": "Mês",
+            "dataType": "dateTime",
+            "sourceColumn": "mes",
+            "summarizeBy": "none",
+            "lineageTag": "0d812f2b-3da1-5ab5-8689-6369841bce49",
+            "formatString": "dd/MM/yyyy",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "ID da categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria_id",
+            "summarizeBy": "none",
+            "lineageTag": "357bc0ef-11ab-5e57-beda-89e6a19ac5ce",
+            "isHidden": true
+          },
+          {
+            "name": "Quantidade",
+            "dataType": "int64",
+            "sourceColumn": "unidades_previstas",
+            "summarizeBy": "none",
+            "lineageTag": "caf28bcd-d3c9-542c-845f-87606f2c3a6a"
+          },
+          {
+            "name": "Método",
+            "dataType": "string",
+            "sourceColumn": "metodo",
+            "summarizeBy": "none",
+            "lineageTag": "b7e741b5-77eb-5b49-a9b3-de171860c0c2"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Previsão",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"previsao.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"mes\", type date}, {\"categoria_id\", type text}, {\"unidades_previstas\", Int64.Type}, {\"metodo\", type text}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Unidades previstas",
+            "expression": "SUM('Previsão'[Quantidade])",
+            "description": "Previsão para janeiro a março de 2026.",
+            "lineageTag": "d9196edc-56d7-506a-954c-c7adfa9aa64d",
+            "formatString": "#,0"
+          },
+          {
+            "name": "Método escolhido",
+            "expression": "SELECTEDVALUE('Previsão'[Método])",
+            "description": "Método selecionado por categoria no período de validação.",
+            "lineageTag": "561536a3-999f-524b-85ac-16f6da30b3b9"
+          }
+        ]
+      },
+      {
+        "name": "Backtest",
+        "isHidden": false,
+        "lineageTag": "8d16db24-a911-5b15-82b1-b2e422bda88d",
+        "columns": [
+          {
+            "name": "Mês",
+            "dataType": "dateTime",
+            "sourceColumn": "mes",
+            "summarizeBy": "none",
+            "lineageTag": "296d81da-2785-5df2-8a55-ecdcc137ce38",
+            "formatString": "dd/MM/yyyy",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ]
+          },
+          {
+            "name": "ID da categoria",
+            "dataType": "string",
+            "sourceColumn": "categoria_id",
+            "summarizeBy": "none",
+            "lineageTag": "726ce3af-38aa-5bbd-8a26-20b64cf693cf",
+            "isHidden": true
+          },
+          {
+            "name": "Método",
+            "dataType": "string",
+            "sourceColumn": "metodo",
+            "summarizeBy": "none",
+            "lineageTag": "f29aa771-583e-55af-9b57-37cea588bd16"
+          },
+          {
+            "name": "Unidades reais",
+            "dataType": "int64",
+            "sourceColumn": "unidades_reais",
+            "summarizeBy": "none",
+            "lineageTag": "3efb24e1-7134-599e-8ada-364e65eccc9f"
+          },
+          {
+            "name": "Unidades previstas no teste",
+            "dataType": "int64",
+            "sourceColumn": "unidades_previstas",
+            "summarizeBy": "none",
+            "lineageTag": "704fc511-49dc-5551-b0a8-31a7f39b399f"
+          },
+          {
+            "name": "Erro absoluto",
+            "dataType": "int64",
+            "sourceColumn": "erro_absoluto",
+            "summarizeBy": "none",
+            "lineageTag": "8b746569-aa6c-52dc-af4d-62e8fb7385e9"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Backtest",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Fonte = LerCsv(\"backtest.csv\"),",
+                "    Tipos = Table.TransformColumnTypes(Fonte, {{\"mes\", type date}, {\"categoria_id\", type text}, {\"metodo\", type text}, {\"unidades_reais\", Int64.Type}, {\"unidades_previstas\", Int64.Type}, {\"erro_absoluto\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Tipos"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "WAPE no teste",
+            "expression": "DIVIDE(SUM('Backtest'[Erro absoluto]), SUM('Backtest'[Unidades reais]))",
+            "description": "Soma dos desvios absolutos por mês e categoria / total observado em out–dez/2025.",
+            "lineageTag": "b8d1e352-6f4c-5069-8ee2-6b40ebf43acd",
+            "formatString": "0.0%"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "a2b709ec-01c3-54e0-8588-171f6b00a7f1",
+        "fromTable": "Vendas",
+        "fromColumn": "Data",
+        "toTable": "Calendário",
+        "toColumn": "Data",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "8c597283-fd94-56ea-9a77-ca0167f9a6a4",
+        "fromTable": "Vendas",
+        "fromColumn": "ID do produto",
+        "toTable": "Produtos",
+        "toColumn": "ID do produto",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "efa8a599-916a-5d6b-a7b2-1b970bd11d03",
+        "fromTable": "Vendas",
+        "fromColumn": "ID da categoria",
+        "toTable": "Categorias",
+        "toColumn": "ID da categoria",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "4c37cd94-4612-5aa2-88a8-7228dae3e2c4",
+        "fromTable": "Previsão",
+        "fromColumn": "Mês",
+        "toTable": "Calendário",
+        "toColumn": "Data",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "889731ae-0d39-51d9-9996-e7d1e0dd20ae",
+        "fromTable": "Previsão",
+        "fromColumn": "ID da categoria",
+        "toTable": "Categorias",
+        "toColumn": "ID da categoria",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "dc8ab630-f311-5986-a2a3-77b1bcf2bedc",
+        "fromTable": "Backtest",
+        "fromColumn": "Mês",
+        "toTable": "Calendário",
+        "toColumn": "Data",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "08bf82d2-67fe-559c-9d28-adf72a56ab47",
+        "fromTable": "Backtest",
+        "fromColumn": "ID da categoria",
+        "toTable": "Categorias",
+        "toColumn": "ID da categoria",
+        "crossFilteringBehavior": "oneDirection"
+      }
+    ]
+  }
+}
